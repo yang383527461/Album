@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Album</string>
+    <string name="login">登  录</string>
+    <string name="forgetPaw">忘记密码？</string>
+    <string name="register">注册新用户</string>
+    <string name="hintname">用户名</string>
+    <string name="hintPwd">密码</string>
+</resources>
