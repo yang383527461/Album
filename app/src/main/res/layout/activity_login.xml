@@ -4,32 +4,43 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.ygy.album.activity.LoginActivity">
+    tools:context="com.ygy.album.activity.LoginActivity"
+    android:id="@+id/activityLayout">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 <com.ygy.album.custView.CustVideoPlay
     android:id="@+id/custVideoView"
     android:layout_width="match_parent"
     android:layout_height="match_parent" />
+
     <RelativeLayout
+        android:id="@+id/viewLayout"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="300dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="100dp">
+        android:layout_marginBottom="80dp"
+        android:background="#00ffffff">
         <EditText
             android:id="@+id/edt_login_name"
             android:layout_width="match_parent"
             android:layout_height="40dp"
+            android:inputType="phone"
             android:hint="@string/hintname"
             android:textColorHint="#dddfe4"
             android:textColor="#dddfe4"
             android:background="@null"
             android:drawableBottom="@drawable/shape_line"
-            android:textCursorDrawable="@null"/>
+            android:textCursorDrawable="@null"
+            android:layout_marginTop="50dp"/>
         <EditText
             android:id="@+id/edt_login_pwd"
             android:layout_width="match_parent"
             android:layout_height="40dp"
+            android:inputType="textPassword"
             android:hint="@string/hintPwd"
             android:textColorHint="#dddfe4"
             android:textColor="#dddfe4"
@@ -53,16 +64,20 @@
             android:layout_below="@+id/btn_login"
             android:layout_marginTop="10dp">
             <TextView
+                android:id="@+id/tv_login_froget"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/forgetPaw"
                 android:textColor="#1CA9E1"/>
             <TextView
+                android:id="@+id/tv_login_register"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/register"
                 android:textColor="#1CA9E1"
                 android:layout_alignParentRight="true"/>
         </RelativeLayout>
+    </RelativeLayout>
+
     </RelativeLayout>
 </RelativeLayout>

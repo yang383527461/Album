@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+
+        android:layout_marginTop="5dp">
+<com.makeramen.roundedimageview.RoundedImageView
+    android:id="@+id/item_icon"
+    android:layout_width="50dp"
+    android:layout_height="50dp"
+    tools:src="@drawable/p1"
+    app:riv_corner_radius="100dp"/>
+        <TextView
+            android:id="@+id/tv_item_name"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            tools:text="昵称"
+            android:textSize="25dp"
+            android:gravity="center"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@+id/item_icon"/>
+
+        <TextView
+            android:id="@+id/tv_item_attention"
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:text="关注"
+            android:textColor="#ffffff"
+            android:gravity="center"
+            android:layout_centerVertical="true"
+
+            android:layout_alignParentRight="true"
+            android:background="@drawable/selector_attention"
+            />
+    </RelativeLayout>
+<ImageView
+    android:id="@+id/item_img"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:scaleType="fitXY"
+    android:adjustViewBounds="true"
+    tools:src="@drawable/p1"
+    android:layout_marginTop="10dp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="图片名称"
+        android:textSize="30dp"
+        android:layout_margin="10dp"/>
+<com.zhy.view.flowlayout.TagFlowLayout
+    android:id="@+id/item_tag"
+    app:max_select="1"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"/>
+    <view
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp">
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/love"
+        android:layout_marginLeft="5dp"/>
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/like"
+        android:layout_marginLeft="15dp"/>
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/comment"
+        android:layout_marginLeft="15dp"/>
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/share"
+        android:layout_marginLeft="15dp"/>
+
+</LinearLayout>
+    <view
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="10dp"/>
+</LinearLayout>
