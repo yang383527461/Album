@@ -10,13 +10,12 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-
         android:layout_marginTop="5dp">
 <com.makeramen.roundedimageview.RoundedImageView
     android:id="@+id/item_icon"
     android:layout_width="50dp"
     android:layout_height="50dp"
-    tools:src="@drawable/p1"
+    tools:src="@mipmap/p1"
     app:riv_corner_radius="100dp"/>
         <TextView
             android:id="@+id/tv_item_name"
@@ -27,7 +26,6 @@
             android:gravity="center"
             android:layout_marginLeft="20dp"
             android:layout_toRightOf="@+id/item_icon"/>
-
         <TextView
             android:id="@+id/tv_item_attention"
             android:layout_width="60dp"
@@ -36,7 +34,6 @@
             android:textColor="#ffffff"
             android:gravity="center"
             android:layout_centerVertical="true"
-
             android:layout_alignParentRight="true"
             android:background="@drawable/selector_attention"
             />
@@ -47,7 +44,7 @@
     android:layout_height="wrap_content"
     android:scaleType="fitXY"
     android:adjustViewBounds="true"
-    tools:src="@drawable/p1"
+    tools:src="@mipmap/p1"
     android:layout_marginTop="10dp"/>
     <TextView
         android:layout_width="match_parent"
@@ -70,24 +67,23 @@
     <ImageView
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:src="@drawable/love"
+        android:src="@mipmap/love"
         android:layout_marginLeft="5dp"/>
     <ImageView
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:src="@drawable/like"
+        android:src="@mipmap/like"
         android:layout_marginLeft="15dp"/>
     <ImageView
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:src="@drawable/comment"
+        android:src="@mipmap/comment"
         android:layout_marginLeft="15dp"/>
     <ImageView
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:src="@drawable/share"
+        android:src="@mipmap/share"
         android:layout_marginLeft="15dp"/>
-
 </LinearLayout>
     <view
         android:layout_width="match_parent"

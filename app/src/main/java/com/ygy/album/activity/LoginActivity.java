@@ -1,12 +1,11 @@
 package com.ygy.album.activity;
 
-import android.graphics.Rect;
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
@@ -14,19 +13,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ygy.album.R;
-import com.ygy.album.base.BasaActivity;
+import com.ygy.album.base.BaseActivity;
 import com.ygy.album.bean.LoginBean;
 import com.ygy.album.custView.CustVideoPlay;
 import com.ygy.album.presenter.LoginPresenter;
 import com.ygy.album.presenter.LoginPresenterImpl;
-import com.ygy.album.utils.AndroidBug5497Workaround;
 import com.ygy.album.view.LoginView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class LoginActivity extends BasaActivity implements LoginView {
+public class LoginActivity extends BaseActivity implements LoginView {
 
     @BindView(R.id.custVideoView)
     CustVideoPlay custVideoView;
@@ -51,7 +49,7 @@ public class LoginActivity extends BasaActivity implements LoginView {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setStatusBar();
+        setStatusBarBottom();
         setFull();
         setContentView(R.layout.activity_login);
       //  AndroidBug5497Workaround.assistActivity(this);
@@ -66,7 +64,6 @@ public class LoginActivity extends BasaActivity implements LoginView {
                 custVideoView.start();
             }
         });
-
 
     }
 
@@ -112,6 +109,7 @@ public class LoginActivity extends BasaActivity implements LoginView {
             case R.id.tv_login_froget:
                 break;
             case R.id.tv_login_register:
+                startActivity(new Intent(this, RegisterActivity.class));
                 break;
         }
     }
