@@ -15,4 +15,5 @@
     <string name="tv_search">发现</string>
     <string name="tv_follow">关注</string>
     <string name="tv_my">我的</string>
+    <string name="exit_follow">取消关注</string>
 </resources>

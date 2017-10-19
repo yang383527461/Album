@@ -6,12 +6,12 @@
     android:layout_height="match_parent"
 
     tools:context="com.ygy.album.activity.MainActivity">
-    <FrameLayout
-        android:id="@+id/frame_mian"
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager_mian"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/radiogroup">
-    </FrameLayout>
+    </android.support.v4.view.ViewPager>
 <RadioGroup
     android:id="@+id/radiogroup"
     android:layout_width="match_parent"
