@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     tools:context="com.ygy.album.activity.MainActivity">
-    <android.support.v4.view.ViewPager
-        android:id="@+id/viewpager_mian"
+    <FrameLayout
+        android:id="@+id/frame_mian"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/radiogroup">
-    </android.support.v4.view.ViewPager>
+    </FrameLayout>
 <RadioGroup
     android:id="@+id/radiogroup"
     android:layout_width="match_parent"
@@ -24,13 +25,13 @@
         android:id="@+id/radbtn_home"
         android:drawableTop="@drawable/selector_home"
         android:text="@string/tv_home"
-        style="@style/textStyle"
-        android:checked="true"/>
+        style="@style/textStyle" />
     <RadioButton
         android:id="@+id/radbtn_search"
         android:drawableTop="@drawable/selector_search"
         android:text="@string/tv_search"
-        style="@style/textStyle"/>
+        style="@style/textStyle"
+        android:checked="true"/>
     <Button
         android:id="@+id/radbtn_add"
         android:layout_width="40dp"

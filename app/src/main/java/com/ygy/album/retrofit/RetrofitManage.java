@@ -25,7 +25,6 @@ public class RetrofitManage {
 
     private static RetrofitService service = mRetrofit.create(RetrofitService.class);
 
-
     /**
      * 登录
      */

@@ -50,6 +50,7 @@ public class LoginActivity extends BaseActivity implements LoginView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setStatusBarBottom();
+
         setFull();
         setContentView(R.layout.activity_login);
       //  AndroidBug5497Workaround.assistActivity(this);
