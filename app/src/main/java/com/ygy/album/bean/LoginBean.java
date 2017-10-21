@@ -6,85 +6,62 @@ package com.ygy.album.bean;
 
 public class LoginBean {
 
-    /**
-     * msg : 登陆成功
-     * user : {"userId":1,"name":"1","userName":"12","password":"234"}
-     * status : 1
-     */
 
-    private String msg;
-    private UserBean user;
-    private int status;
+    private Object id;
+    private String username;
+    private String nick;
+    private String password;
+    private String role;
+    private String image;
 
-    public String getMsg() {
-        return msg;
+    public Object getId() {
+        return id;
     }
 
-    public void setMsg(String msg) {
-        this.msg = msg;
+    public void setId(Object id) {
+        this.id = id;
     }
 
-    public UserBean getUser() {
-        return user;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUser(UserBean user) {
-        this.user = user;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public int getStatus() {
-        return status;
+    public String getNick() {
+        return nick;
     }
 
-    public void setStatus(int status) {
-        this.status = status;
+    public void setNick(String nick) {
+        this.nick = nick;
     }
 
-    public static class UserBean {
-        /**
-         * userId : 1
-         * name : 1
-         * userName : 12
-         * password : 234
-         */
-
-        private int userId;
-        private String name;
-        private String userName;
-        private String password;
-
-        public int getUserId() {
-            return userId;
-        }
-
-        public void setUserId(int userId) {
-            this.userId = userId;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public String getUserName() {
-            return userName;
-        }
-
-        public void setUserName(String userName) {
-            this.userName = userName;
-        }
-
-        public String getPassword() {
-            return password;
-        }
-
-        public void setPassword(String password) {
-            this.password = password;
-        }
+    public String getPassword() {
+        return password;
     }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
 }
 
 

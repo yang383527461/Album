@@ -28,7 +28,6 @@
             android:id="@+id/edt_login_name"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:inputType="phone"
             android:hint="@string/hintname"
             android:textColorHint="#dddfe4"
             android:textColor="#dddfe4"

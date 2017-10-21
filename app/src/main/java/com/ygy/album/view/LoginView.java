@@ -1,5 +1,6 @@
 package com.ygy.album.view;
 
+import com.ygy.album.bean.BaseBean;
 import com.ygy.album.bean.LoginBean;
 
 /**
@@ -8,5 +9,6 @@ import com.ygy.album.bean.LoginBean;
 
 public interface LoginView {
     void success(LoginBean loginBean);
-    void fail(Throwable e);
+    void fail(String str);
+    void error(Throwable e);
 }

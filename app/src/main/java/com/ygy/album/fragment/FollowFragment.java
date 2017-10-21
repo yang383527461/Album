@@ -67,7 +67,7 @@ public class FollowFragment extends Fragment {
         mFragments.add(mFragment);
 
         mTitles.add("关注");
-        mTitles.add("收藏");
+        mTitles.add("消息");
     }
 
     @Override

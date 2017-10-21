@@ -8,15 +8,21 @@
 <android.support.design.widget.TabLayout
     android:id="@+id/tab_follow"
     android:layout_width="match_parent"
-    android:layout_height="40dp"
-    app:tabIndicatorColor="#494848"
+    android:layout_height="50dp"
+    app:tabIndicatorColor="#000000"
+    app:tabIndicatorHeight="1dp"
     app:tabTextAppearance="@style/MyTabLayoutTextAppearance"
     app:tabTextColor="?android:textColorSecondary"
     app:tabSelectedTextColor="?android:textColorPrimary"/>
-
+<View
+    android:id="@+id/view_view"
+    android:layout_width="match_parent"
+    android:layout_height="0.5dp"
+    android:layout_below="@+id/tab_follow"
+    android:background="#a3a1a1"/>
 <android.support.v4.view.ViewPager
     android:id="@+id/viewpager_follow"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_below="@id/tab_follow"/>
+    android:layout_below="@id/view_view"/>
 </RelativeLayout>

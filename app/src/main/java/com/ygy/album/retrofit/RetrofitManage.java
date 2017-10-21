@@ -2,7 +2,9 @@ package com.ygy.album.retrofit;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.ygy.album.bean.BaseBean;
 import com.ygy.album.bean.LoginBean;
+import com.ygy.album.bean.ResponseBean;
 
 
 import retrofit2.Retrofit;
@@ -15,7 +17,7 @@ import rx.Observable;
  */
 
 public class RetrofitManage {
-    private static String baseUrl = "http://116.196.109.110:8080/";
+    private static String baseUrl = "http://120.78.143.14/";
 
     private static Retrofit mRetrofit = new Retrofit.Builder()
             .baseUrl(baseUrl)
@@ -28,7 +30,14 @@ public class RetrofitManage {
     /**
      * 登录
      */
-    public static Observable<LoginBean> login(String userName, String passwrod){
+    public static Observable<BaseBean<LoginBean>> login(String userName, String passwrod){
         return service.login(userName, passwrod);
+    }
+
+    /**
+     * 注册
+     */
+    public static Observable<ResponseBean> register(String name, String userName, String password){
+        return service.register(name, userName, password);
     }
 }

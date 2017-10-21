@@ -1,5 +1,6 @@
 package com.ygy.album.presenter;
 
+import com.ygy.album.bean.BaseBean;
 import com.ygy.album.bean.LoginBean;
 import com.ygy.album.model.LoginModel;
 import com.ygy.album.model.LoginModelImpl;
@@ -35,7 +36,12 @@ public class LoginPresenterImpl extends BasePresenter implements LoginPresenter,
     }
 
     @Override
-    public void fail(Throwable e) {
-        mLoginView.fail(e);
+    public void error(Throwable e) {
+        mLoginView.error(e);
+    }
+
+    @Override
+    public void fail(String str) {
+        mLoginView.fail(str);
     }
 }

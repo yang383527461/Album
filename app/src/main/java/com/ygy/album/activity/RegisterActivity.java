@@ -4,26 +4,36 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.ygy.album.R;
 import com.ygy.album.custView.CustVideoPlay;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+import org.json.JSONObject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.smssdk.EventHandler;
 import cn.smssdk.SMSSDK;
+import cn.smssdk.utils.SMSLog;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    @BindView(R.id.custVideoView)
-    CustVideoPlay custVideoView;
+    @BindView(R.id.img_register_bck)
+    ImageView imgBackground;
     @BindView(R.id.edt_register_name)
     EditText edtRegisterName;
     @BindView(R.id.btn_register_code)
@@ -37,6 +47,7 @@ public class RegisterActivity extends AppCompatActivity {
     @BindView(R.id.tv_register_code)
     EditText tvRegisterCode;
     private EventHandler eventHandler;
+
     private int countdown = 30;
 
     @Override
@@ -44,77 +55,76 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         ButterKnife.bind(this);
+
         String uri = "android.resource://" + getPackageName() + "/" + R.raw.login_background;
-        custVideoView.setVideoURI(Uri.parse(uri));
-        custVideoView.start();
-        custVideoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            @Override
-            public void onCompletion(MediaPlayer mediaPlayer) {
-                custVideoView.start();
-            }
-        });
+
         // 创建EventHandler对象
         eventHandler = new EventHandler() {
             public void afterEvent(int event, int result, Object data) {
-                if (data instanceof Throwable) {
-                    Throwable throwable = (Throwable) data;
-                    final String msg = throwable.getMessage();
-                    new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Toast.makeText(RegisterActivity.this, msg, Toast.LENGTH_SHORT).show();
-                            Log.d("asd", msg);
-                        }
-                    }).start();
-
-                } else {
-                    if (event == SMSSDK.EVENT_GET_VERIFICATION_CODE) {
-                        // 处理你自己的逻辑
-                        Log.d("asd", "发送成功");
-                        new Thread(new Runnable() {
-                            @Override
-                            public void run() {
-                                try {
-                                    while (countdown >= 0) {
-                                        Thread.sleep(1000);
-                                        Log.d("asd", countdown-- + "s");
-
-                                    }
-                                } catch (InterruptedException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                        }).start();
-
-                    } else if (event == SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE) {
-                        Log.d("asd", "Success");
-                    }
-                }
+                Message msg = new Message();
+                msg.arg1 = event;
+                msg.arg2 = result;
+                msg.obj = data;
+                mHandler.sendMessage(msg);
             }
         };
 
         // 注册监听器
         SMSSDK.registerEventHandler(eventHandler);
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
+    }
+
+    Handler mHandler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            int event = msg.arg1;
+            int result = msg.arg2;
+            Object data = msg.obj;
+            if(result == SMSSDK.RESULT_COMPLETE){
+                if(event == SMSSDK.EVENT_GET_VERIFICATION_CODE){
+                    Toast.makeText(RegisterActivity.this, "发送成功", Toast.LENGTH_SHORT).show();
+                    getdownTime();
+                }else if(event == SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE){
+                    Toast.makeText(RegisterActivity.this, "验证成功", Toast.LENGTH_SHORT).show();
+                }
+            }else {
+                int status = 0;
                 try {
-                    while (countdown >= 0) {
-                        Thread.sleep(1000);
-                        Log.d("asd", countdown-- + "s");
-                        btnRegisterCode.setText("已发送");
+                    ((Throwable) data).printStackTrace();
+                    Throwable throwable = (Throwable) data;
+
+                    JSONObject object = new JSONObject(throwable.getMessage());
+                    String des = object.optString("detail");
+                    status = object.optInt("status");
+                    if (!TextUtils.isEmpty(des)) {
+                        Toast.makeText(RegisterActivity.this, des, Toast.LENGTH_SHORT).show();
+                        return;
                     }
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                } catch (Exception e) {
+                    SMSLog.getInstance().w(e);
                 }
             }
-        }).start();
+        }
+    };
+
+    public void getdownTime(){
+        new CountDownTimer(30000,1000){
+
+            @Override
+            public void onTick(long millisUntilFinished) {
+                btnRegisterCode.setText(millisUntilFinished/1000 +" s");
+            }
+
+            @Override
+            public void onFinish() {
+                btnRegisterCode.setText("验证码");
+            }
+        }.start();
     }
 
     @Override
     protected void onRestart() {
-        custVideoView.start();
         super.onRestart();
     }
 
@@ -122,6 +132,7 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         SMSSDK.unregisterEventHandler(eventHandler);
+
     }
 
     @OnClick({R.id.btn_register_code, R.id.btn_login})
@@ -129,9 +140,17 @@ public class RegisterActivity extends AppCompatActivity {
         String phone = edtRegisterName.getText().toString().trim();
         switch (view.getId()) {
             case R.id.btn_register_code:
+                if(!btnRegisterCode.getText().toString().trim().equals("验证码")){
+                    Toast.makeText(this, "请等待倒计时再次收取验证码", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 SMSSDK.getVerificationCode("86", phone);
                 break;
             case R.id.btn_login:
+                if (TextUtils.isEmpty(edtRegisterPwd.getText().toString().trim())
+                        ||TextUtils.isEmpty(edtRegisterPwd2.getText().toString().trim())){
+                    Toast.makeText(this, "密码不能为空", Toast.LENGTH_SHORT).show();
+                }
                 String code = tvRegisterCode.getText().toString().trim();
                 SMSSDK.submitVerificationCode("86", phone, code);
                 break;

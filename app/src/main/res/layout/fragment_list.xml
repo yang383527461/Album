@@ -2,16 +2,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.ygy.album.fragment.FollowListFragment">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    tools:context="com.ygy.album.fragment.FollowListFragment"
+    android:background="#efeeee">
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycle_follow"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="list" />
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:src="@mipmap/my_background"/>
-
+        android:layout_height="wrap_content"
+        android:background="#ffffff"/>
 </FrameLayout>

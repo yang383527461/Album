@@ -10,10 +10,12 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <com.ygy.album.custView.CustVideoPlay
-            android:id="@+id/custVideoView"
+        <ImageView
+            android:id="@+id/img_register_bck"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:src="@mipmap/register_background"
+            android:scaleType="fitXY"/>
 
         <RelativeLayout
             android:id="@+id/viewLayout"

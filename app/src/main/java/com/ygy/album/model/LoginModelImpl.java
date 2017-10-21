@@ -1,5 +1,6 @@
 package com.ygy.album.model;
 
+import com.ygy.album.bean.BaseBean;
 import com.ygy.album.bean.LoginBean;
 import com.ygy.album.retrofit.RetrofitManage;
 
@@ -23,10 +24,10 @@ public class LoginModelImpl implements LoginModel{
 
     @Override
     public Subscription login(String name, String password) {
-        Observable<LoginBean> observable = RetrofitManage.login(name, password);
+        Observable<BaseBean<LoginBean>> observable = RetrofitManage.login(name, password);
         Subscription subscription = observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<LoginBean>() {
+                .subscribe(new Subscriber<BaseBean<LoginBean>>() {
                     @Override
                     public void onCompleted() {
 
@@ -34,12 +35,20 @@ public class LoginModelImpl implements LoginModel{
 
                     @Override
                     public void onError(Throwable e) {
-                        mOnLoginListener.fail(e);
+                        mOnLoginListener.error(e);
                     }
 
                     @Override
-                    public void onNext(LoginBean loginBean) {
-                        mOnLoginListener.success(loginBean);
+                    public void onNext(BaseBean<LoginBean> bean) {
+                        if(bean.isSuccess()){
+                            if(bean.getCode().equals("200")){
+                                mOnLoginListener.success(bean.getData());
+                            }else{
+                                mOnLoginListener.fail("账户密码错误");
+                            }
+                        }else{
+                            mOnLoginListener.error(new Throwable("异常"));
+                        }
                     }
                 });
         return subscription;
@@ -47,6 +56,7 @@ public class LoginModelImpl implements LoginModel{
 
     public interface OnLoginListener{
         void success(LoginBean loginBean);
-        void fail(Throwable e);
+        void error(Throwable e);
+        void fail(String str);
     }
 }
