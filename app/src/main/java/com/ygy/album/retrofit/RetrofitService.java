@@ -17,8 +17,8 @@ public interface RetrofitService {
     Observable<BaseBean<LoginBean>> login(@Query("username") String name, @Query("password") String password);
 
     @GET("register")
-    Observable<ResponseBean> register(@Query("name") String name
-                                        , @Query("userName") String userName
-                                        , @Query("password") String password);
+    Observable<BaseBean> register(@Query("username") String username
+                                        , @Query("password") String password
+                                        , @Query("nick") String nick);
 
 }

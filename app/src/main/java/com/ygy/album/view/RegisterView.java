@@ -1,5 +1,6 @@
 package com.ygy.album.view;
 
+import com.ygy.album.bean.BaseBean;
 import com.ygy.album.bean.ResponseBean;
 
 /**
@@ -7,6 +8,8 @@ import com.ygy.album.bean.ResponseBean;
  */
 
 public interface RegisterView {
-    void success(ResponseBean responseBean);
-    void fail(Throwable e);
+    void success(BaseBean bean);
+    void error(Throwable e);
+    void fail(String str);
+    void countDown();
 }

@@ -37,7 +37,7 @@ public class RetrofitManage {
     /**
      * 注册
      */
-    public static Observable<ResponseBean> register(String name, String userName, String password){
+    public static Observable<BaseBean> register(String name, String userName, String password){
         return service.register(name, userName, password);
     }
 }

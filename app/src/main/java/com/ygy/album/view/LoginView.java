@@ -11,4 +11,5 @@ public interface LoginView {
     void success(LoginBean loginBean);
     void fail(String str);
     void error(Throwable e);
+    void initVideo();
 }

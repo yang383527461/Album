@@ -13,6 +13,13 @@
     android:layout_alignParentTop="true"
     android:layout_alignParentLeft="true"
     android:layout_alignParentStart="true">
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:src="@mipmap/more"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="10dp"/>
     <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/img_my_icon"
         android:layout_width="60dp"

@@ -7,18 +7,18 @@ package com.ygy.album.bean;
 public class LoginBean {
 
 
-    private Object id;
+    private String id;
     private String username;
     private String nick;
     private String password;
     private String role;
     private String image;
 
-    public Object getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Object id) {
+    public void setId(String id) {
         this.id = id;
     }
 

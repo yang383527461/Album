@@ -6,12 +6,9 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
 import android.transition.Transition;
 import android.transition.TransitionInflater;
-import android.util.Log;
 import android.view.View;
-import android.view.animation.Transformation;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
@@ -20,11 +17,11 @@ import android.widget.Toast;
 
 import com.ygy.album.R;
 import com.ygy.album.base.BaseActivity;
-import com.ygy.album.bean.BaseBean;
 import com.ygy.album.bean.LoginBean;
 import com.ygy.album.custView.CustVideoPlay;
 import com.ygy.album.presenter.LoginPresenter;
 import com.ygy.album.presenter.LoginPresenterImpl;
+import com.ygy.album.utils.PreferenceUtil;
 import com.ygy.album.view.LoginView;
 
 import butterknife.BindView;
@@ -49,24 +46,69 @@ public class LoginActivity extends BaseActivity implements LoginView {
     RelativeLayout activityLayout;
     @BindView(R.id.viewLayout)
     RelativeLayout viewLayout;
+    @BindView(R.id.btn_login_visitor)
+    TextView btnLoginVisitor;
 
     private LoginPresenter mLoginPresenter;
     private boolean keyBoardShown = true;
+    private String uri;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setStatusBarBottom();
-
         setFull();
         setContentView(R.layout.activity_login);
-      //  AndroidBug5497Workaround.assistActivity(this);
         ButterKnife.bind(this);
-        //setupWindowAnimations();
-
+        setupWindowAnimations();
+        uri = "android.resource://" + getPackageName() + "/" + R.raw.login_background;
         mLoginPresenter = new LoginPresenterImpl(this);
-        String uri = "android.resource://" + getPackageName() + "/" + R.raw.login_background;
+        initVideo();
+    }
+
+
+    private void setupWindowAnimations() {
+        Transition slideTransition = TransitionInflater.from(this).inflateTransition(R.transition.slide_from_right);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setEnterTransition(slideTransition);
+            getWindow().setExitTransition(slideTransition);
+        }
+    }
+
+    @Override
+    protected void onRestart() {
+        custVideoView.start();
+        super.onRestart();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
+
+    @Override
+    public void success(LoginBean loginBean) {
+        Toast.makeText(this, "登录成功", Toast.LENGTH_SHORT).show();
+        PreferenceUtil.setStringValue(this, "name", loginBean.getNick());
+        PreferenceUtil.setStringValue(this, "icon", loginBean.getImage());
+        PreferenceUtil.setStringValue(this, "userId", loginBean.getId());
+        startActivity(new Intent(this, MainActivity.class));
+    }
+
+    @Override
+    public void fail(String str) {
+        Toast.makeText(this, str, Toast.LENGTH_SHORT).show();
+
+    }
+
+    @Override
+    public void error(Throwable e) {
+        Toast.makeText(this, "异常1", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void initVideo() {
         custVideoView.setVideoURI(Uri.parse(uri));
         custVideoView.start();
         custVideoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
@@ -90,42 +132,7 @@ public class LoginActivity extends BaseActivity implements LoginView {
         });
     }
 
-    private void setupWindowAnimations() {
-        Transition slideTransition = TransitionInflater.from(this).inflateTransition(R.transition.slide_from_right);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setEnterTransition(slideTransition);
-            getWindow().setExitTransition(slideTransition);
-        }
-    }
-
-    @Override
-    protected void onRestart() {
-        custVideoView.start();
-        super.onRestart();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-    }
-
-    @Override
-    public void success(LoginBean loginBean) {
-        Toast.makeText(this, loginBean.getNick(), Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void fail(String str) {
-        Toast.makeText(this, str, Toast.LENGTH_SHORT).show();
-
-    }
-
-    @Override
-    public void error(Throwable e) {
-        Toast.makeText(this, "异常1", Toast.LENGTH_SHORT).show();
-    }
-
-    @OnClick({R.id.btn_login, R.id.tv_login_froget, R.id.tv_login_register})
+    @OnClick({R.id.btn_login, R.id.tv_login_froget, R.id.tv_login_register, R.id.btn_login_visitor})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_login:
@@ -145,7 +152,12 @@ public class LoginActivity extends BaseActivity implements LoginView {
             case R.id.tv_login_froget:
                 break;
             case R.id.tv_login_register:
+                edtLoginName.setText("");
+                edtLoginPwd.setText("");
                 startActivity(new Intent(this, RegisterActivity.class));
+                break;
+            case R.id.btn_login_visitor:
+                finish();
                 break;
         }
     }

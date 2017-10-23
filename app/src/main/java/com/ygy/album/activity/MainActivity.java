@@ -1,9 +1,12 @@
 package com.ygy.album.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
@@ -16,6 +19,7 @@ import com.ygy.album.fragment.FollowFragment;
 import com.ygy.album.fragment.HomeFragment;
 import com.ygy.album.fragment.MyFragment;
 import com.ygy.album.fragment.SearchFragment;
+import com.ygy.album.utils.PreferenceUtil;
 import com.ygy.album.utils.Util;
 
 import java.util.ArrayList;
@@ -98,20 +102,38 @@ public class MainActivity extends BaseActivity {
             public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
                 switch (checkedId){
                     case R.id.radbtn_home:
-                        viewpagerMain.setCurrentItem(0);
+                        loginFor(0);
                         break;
                     case R.id.radbtn_search:
-                        viewpagerMain.setCurrentItem(1);
+                        viewpagerMain.setCurrentItem(1, false);
                         break;
                     case R.id.radbtn_follow:
-                        viewpagerMain.setCurrentItem(2);
+                        loginFor(2);
                         break;
                     case R.id.radbtn_my:
-                        viewpagerMain.setCurrentItem(3);
+                        loginFor(3);
                         break;
                 }
             }
         });
+
+        if (TextUtils.isEmpty(PreferenceUtil.getStringValue(this, "name"))){
+            viewpagerMain.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    return true;
+                }
+            });
+        }
+
+    }
+    private void loginFor(int postion){
+        if (TextUtils.isEmpty(PreferenceUtil.getStringValue(this, "name"))){
+            startActivity(new Intent(this, LoginActivity.class));
+            radbtnSearch.setChecked(true);
+            return;
+        }
+        viewpagerMain.setCurrentItem(postion, false);
     }
 
     private void initFragment() {

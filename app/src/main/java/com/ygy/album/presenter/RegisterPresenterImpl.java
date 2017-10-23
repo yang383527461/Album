@@ -1,5 +1,6 @@
 package com.ygy.album.presenter;
 
+import com.ygy.album.bean.BaseBean;
 import com.ygy.album.bean.ResponseBean;
 import com.ygy.album.model.RegisterModel;
 import com.ygy.album.model.RegisterModelImpl;
@@ -29,12 +30,17 @@ public class RegisterPresenterImpl extends BasePresenter implements RegisterPres
     }
 
     @Override
-    public void success(ResponseBean responseBean) {
-        mRegisterView.success(responseBean);
+    public void success(BaseBean bean) {
+        mRegisterView.success(bean);
     }
 
     @Override
-    public void fail(Throwable e) {
-        mRegisterView.fail(e);
+    public void error(Throwable e) {
+        mRegisterView.error(e);
+    }
+
+    @Override
+    public void fail(String str) {
+        mRegisterView.fail(str);
     }
 }

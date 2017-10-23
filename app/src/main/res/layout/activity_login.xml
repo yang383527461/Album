@@ -29,6 +29,7 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:hint="@string/hintname"
+            android:maxLines="1"
             android:textColorHint="#dddfe4"
             android:textColor="#dddfe4"
             android:background="@null"
@@ -44,6 +45,7 @@
             android:textColorHint="#dddfe4"
             android:textColor="#dddfe4"
             android:background="@null"
+            android:maxLines="1"
             android:drawableBottom="@drawable/shape_line"
             android:textCursorDrawable="@null"
             android:layout_below="@+id/edt_login_name"/>
@@ -79,4 +81,15 @@
     </RelativeLayout>
 
     </RelativeLayout>
+    <TextView
+        android:id="@+id/btn_login_visitor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="随便看看"
+        android:textColor="#1CA9E1"
+        android:textSize="15dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="30dp"/>
 </RelativeLayout>

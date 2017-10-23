@@ -20,16 +20,29 @@
         <RelativeLayout
             android:id="@+id/viewLayout"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="350dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="80dp"
+            android:layout_marginBottom="50dp"
             android:background="#00ffffff">
+            <EditText
+                android:id="@+id/edt_register_nick"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:maxLines="1"
+                android:hint="@string/nick"
+                android:textColorHint="#dddfe4"
+                android:textColor="#dddfe4"
+                android:background="@null"
+                android:drawableBottom="@drawable/shape_line"
+                android:textCursorDrawable="@null"
+                android:layout_marginTop="50dp"/>
             <EditText
                 android:id="@+id/edt_register_name"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
+                android:maxLines="1"
                 android:inputType="phone"
                 android:hint="@string/hintname"
                 android:textColorHint="#dddfe4"
@@ -37,11 +50,13 @@
                 android:background="@null"
                 android:drawableBottom="@drawable/shape_line"
                 android:textCursorDrawable="@null"
-                android:layout_marginTop="50dp"/>
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/edt_register_nick"/>
             <LinearLayout
                 android:id="@+id/sm_view"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
+                android:maxLines="1"
                 android:orientation="horizontal"
                 android:layout_below="@+id/edt_register_name">
                 <EditText
@@ -49,6 +64,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
                     android:layout_weight="7"
+                    android:maxLines="1"
                     android:hint="@string/code"
                     android:textColorHint="#dddfe4"
                     android:textColor="#dddfe4"
@@ -71,6 +87,7 @@
                 android:id="@+id/edt_register_pwd"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
+                android:maxLines="1"
                 android:inputType="textPassword"
                 android:hint="@string/hintPwd"
                 android:textColorHint="#dddfe4"
@@ -83,6 +100,7 @@
                 android:id="@+id/edt_register_pwd2"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
+                android:maxLines="1"
                 android:inputType="textPassword"
                 android:hint="@string/sure_pwd"
                 android:textColorHint="#dddfe4"
